@@ -1,6 +1,6 @@
 
 % Check if the given wav file exists:
-wavFileName = 'F:\Kuliah\Bismillah\matlab\audio.wav';
+wavFileName = 'F:\Kuliah\Bismillah\matlab\data\Tes3.wav';
 fp = fopen(wavFileName, 'rb');
 if (fp<0)
 	fprintf('The file %s has not been found!\n', wavFileName);
