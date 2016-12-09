@@ -1,4 +1,4 @@
-function [cuttedSignal] = vad(x, fs)
+function [cuttedSignal] = vad(x, fs, thresholdVad)
 % Convert mono to stereo
 if (size(x, 2)==2)
 	x = mean(x')';
@@ -106,20 +106,18 @@ for (i=1:size(Limits,1))
     segments{end+1} = x(Limits(i,1):Limits(i,2)); 
 end
 
-ThresholdVad = 0.02;
-
 segments = cell2mat(segments);
 cuttedSignal = [];
 
 for i=1:size(segments)
-    if segments(i) > ThresholdVad
+    if segments(i) > thresholdVad
         cutStart = i;
         break;
     end
 end
 
 for i=size(segments):-1:1
-    if segments(i) > ThresholdVad
+    if segments(i) > thresholdVad
         cutEnd = i;
         break;
     end

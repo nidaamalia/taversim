@@ -1,6 +1,10 @@
-% Check if the given wav file exists:
-wavFileName = 'F:\Kuliah\Bismillah\matlab\data\Alif3.wav';
-data = wavread(wavFileName);
+wavFileName = 'F:\Kuliah\Bismillah\matlab\data\Tes1.wav';
+
+[x,fs] = wavread(wavFileName);
+
+thresholdVad = 0.02;
+
+cuttedSignal = vad(x, fs, thresholdVad);
 
 Tw = 25;           % analysis frame duration (ms)
 Ts = 10;           % analysis frame shift (ms)
@@ -18,7 +22,7 @@ hamming = @(N)(0.54-0.46*cos(2*pi*[0:N-1].'/(N-1)));
 
 % Feature extraction (feature vectors as columns)
 [ MFCCs, FBEs, frames ] = ...
-                           mfcc( speech, fs, Tw, Ts, alpha, hamming, R, M, C, L );
+                           mfcc( segments, fs, Tw, Ts, alpha, hamming, R, M, C, L );
                        
 % Plot cepstrum over time
 figure('Position', [30 100 800 200], 'PaperPositionMode', 'auto', ... 
